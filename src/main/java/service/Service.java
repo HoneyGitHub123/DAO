@@ -10,6 +10,9 @@ public interface Service <T>{
 
     T findByCode(T entity) throws SQLException;
 
+    T findById(T entity) throws SQLException;
+    T findByNum(T entity) throws SQLException;
+
     List<T> findAll() throws SQLException;
 
     boolean insert(T entity) throws SQLException;

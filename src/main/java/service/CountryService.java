@@ -1,12 +1,12 @@
 package service;
 
-import dao.GenericDao;
+import utils.GenericDao;
 import model.Country;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class CountryService implements Service<Country>{
+public class CountryService implements Service<Country> {
 
     private final GenericDao<Country> countryDao;
 
@@ -20,8 +20,18 @@ public class CountryService implements Service<Country>{
     }
 
     @Override
+    public Country findById(Country entity) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Country findByNum(Country entity) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Country> findAll() throws SQLException {
-        return countryDao.findAll() ;
+        return countryDao.findAll();
     }
 
     @Override

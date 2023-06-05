@@ -1,8 +1,7 @@
 package service;
 
-import dao.AbstractDao;
+import utils.AbstractDao;
 import model.Airport;
-import model.Country;
 import utils.DataBaseConnection;
 
 import java.sql.Connection;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AirportDao extends AbstractDao<Airport> {
-
+    @Override
     public Airport findByCode(Airport airport) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
         try {
@@ -31,7 +30,17 @@ public class AirportDao extends AbstractDao<Airport> {
         return null;
     }
 
+    @Override
+    public Airport findById(Airport entity) throws SQLException {
+        return null;
+    }
 
+    @Override
+    public Airport findByNum(Airport entity) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Airport> findAll() throws SQLException {
         List<Airport> airports = new ArrayList<Airport>();
         Connection connection = DataBaseConnection.getConnection();
@@ -49,6 +58,7 @@ public class AirportDao extends AbstractDao<Airport> {
         return null;
     }
 
+    @Override
     public boolean update(Airport airport) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
 
@@ -66,6 +76,7 @@ public class AirportDao extends AbstractDao<Airport> {
         return false;
     }
 
+    @Override
     public boolean delete(Airport airport) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
         try {
@@ -81,6 +92,7 @@ public class AirportDao extends AbstractDao<Airport> {
         return false;
     }
 
+    @Override
     public boolean insert(Airport airport) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
         String sql = "insert into airport values (?,?,?,?,?)";
@@ -105,7 +117,6 @@ public class AirportDao extends AbstractDao<Airport> {
 
 
     private Airport getAirportFromResultSet(ResultSet resultSet) throws SQLException {
-
         Airport airport = new Airport();
         airport.setAirportCode(resultSet.getString("airport_code"));
         airport.setAirportName(resultSet.getString("airport_name"));

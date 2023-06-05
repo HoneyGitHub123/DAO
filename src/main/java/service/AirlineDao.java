@@ -1,6 +1,6 @@
 package service;
 
-import dao.AbstractDao;
+import utils.AbstractDao;
 import model.Airline;
 import utils.DataBaseConnection;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AirlineDao extends AbstractDao<Airline> {
-
+    @Override
     public Airline findByCode(Airline airline) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
         try {
@@ -30,7 +30,17 @@ public class AirlineDao extends AbstractDao<Airline> {
         return null;
     }
 
+    @Override
+    public Airline findById(Airline entity) throws SQLException {
+        return null;
+    }
 
+    @Override
+    public Airline findByNum(Airline entity) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Airline> findAll() throws SQLException {
         List<Airline> airlines = new ArrayList<Airline>();
         Connection connection = DataBaseConnection.getConnection();
@@ -48,7 +58,7 @@ public class AirlineDao extends AbstractDao<Airline> {
         return null;
     }
 
-
+    @Override
     public boolean update(Airline airline) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
 
@@ -66,6 +76,7 @@ public class AirlineDao extends AbstractDao<Airline> {
         return false;
     }
 
+    @Override
     public boolean delete(Airline airline) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
         try {
@@ -81,6 +92,7 @@ public class AirlineDao extends AbstractDao<Airline> {
         return false;
     }
 
+    @Override
     public boolean insert(Airline airline) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
         String sql = "insert into airline(airline_name,airline_code) values (?,?)";
@@ -102,7 +114,6 @@ public class AirlineDao extends AbstractDao<Airline> {
 
 
     private Airline getAirlineFromResultSet(ResultSet resultSet) throws SQLException {
-
         Airline airline = new Airline();
         airline.setAirlineCode(resultSet.getString("airline_code"));
         airline.setAirlineName(resultSet.getString("airline_name"));

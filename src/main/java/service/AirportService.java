@@ -1,6 +1,6 @@
 package service;
 
-import dao.GenericDao;
+import utils.GenericDao;
 import model.Airport;
 
 import java.sql.SQLException;
@@ -17,6 +17,16 @@ public class AirportService implements Service<Airport> {
     @Override
     public Airport findByCode(Airport entity) throws SQLException {
         return airportDao.findByCode(entity);
+    }
+
+    @Override
+    public Airport findById(Airport entity) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Airport findByNum(Airport entity) throws SQLException {
+        return null;
     }
 
     @Override

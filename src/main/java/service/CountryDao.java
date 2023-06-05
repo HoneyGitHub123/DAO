@@ -1,6 +1,6 @@
 package service;
 
-import dao.AbstractDao;
+import utils.AbstractDao;
 import model.Country;
 import utils.DataBaseConnection;
 import java.sql.Connection;
@@ -12,6 +12,7 @@ import java.util.List;
 
 public class CountryDao extends AbstractDao<Country> {
 
+    @Override
     public Country findByCode(Country country) throws SQLException, SQLException {
         Connection connection = DataBaseConnection.getConnection();
         try {
@@ -30,6 +31,17 @@ public class CountryDao extends AbstractDao<Country> {
         return null;
     }
 
+    @Override
+    public Country findById(Country entity) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Country findByNum(Country entity) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Country> findAll() throws SQLException {
         List<Country> countries = new ArrayList<Country>();
         Connection connection = DataBaseConnection.getConnection();
@@ -47,7 +59,7 @@ public class CountryDao extends AbstractDao<Country> {
         return null;
     }
 
-
+@Override
     public boolean insert(Country country) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
         String sql = "insert into country values (?,?)";
@@ -65,7 +77,7 @@ public class CountryDao extends AbstractDao<Country> {
         }
         return false;
     }
-
+@Override
     public boolean update(Country country) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
 
@@ -83,7 +95,7 @@ public class CountryDao extends AbstractDao<Country> {
         return false;
     }
 
-
+@Override
     public boolean delete(Country country) throws SQLException {
         Connection connection = DataBaseConnection.getConnection();
         try {
@@ -101,7 +113,6 @@ public class CountryDao extends AbstractDao<Country> {
 
 
     private Country getCountryFromResultSet(ResultSet resultSet) throws SQLException {
-
         Country country = new Country();
         country.setCountryCode(resultSet.getString("country_code"));
         country.setCountryName(resultSet.getString("country_name"));

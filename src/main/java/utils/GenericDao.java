@@ -1,10 +1,12 @@
-package dao;
+package utils;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface GenericDao<T> {
     T findByCode(T entity) throws SQLException;
+    T findById(T entity) throws SQLException;
+    T findByNum(T entity) throws SQLException;
 
     List<T> findAll() throws SQLException;
 
