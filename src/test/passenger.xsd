@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="passenger" type="passengerType"/>
+  <xs:complexType name="passengerType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="passengerId"/>
+      <xs:element type="xs:string" name="passengername"/>
+      <xs:element type="xs:string" name="mobilenum"/>
+      <xs:element type="xs:string" name="age"/>
+      <xs:element type="xs:string" name="dob"/>
+      <xs:element type="xs:string" name="address"/>
+      <xs:element type="xs:string" name="city"/>
+      <xs:element type="xs:string" name="state"/>
+      <xs:element type="xs:string" name="countrycode"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

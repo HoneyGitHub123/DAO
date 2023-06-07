@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<passenger>
+    <passengerId>100</passengerId>
+    <passengername>Maria John</passengername>
+    <mobilenum>8908977890</mobilenum>
+    <age>35</age>
+    <dob>1989-05-06</dob>
+    <address>109 park victoria</address>
+    <city>Los Angeles</city>
+    <state>California</state>
+    <countrycode>US</countrycode>
+</passenger>

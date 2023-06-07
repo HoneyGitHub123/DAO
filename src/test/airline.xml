@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Airline>
+    <airlinename>American Airlines</airlinename>
+    <airlinecode>AAL</airlinecode>
+    <airlinename>SouthWest Airlines</airlinename>
+    <airlinecode>SWA</airlinecode>
+</Airline>

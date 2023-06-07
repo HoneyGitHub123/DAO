@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Flight>
+    <flightNo>245</flightNo>
+    <flightname>SouthWest Airlines</flightname>
+    <departure>2023-07-02 02:00:00</departure>
+    <arrival>2023-06-02 11:00:00</arrival>
+    <source>Los Angeles</source>
+    <destination>Pittsburgh</destination>
+    <seats>300</seats>
+</Flight>
