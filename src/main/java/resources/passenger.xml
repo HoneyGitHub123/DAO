@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Passengers>
+    <listPassenger>
+        <passengerID>201</passengerID>
+        <passengerName>Lokesh Gupta</passengerName>
+        <mobileNum>5678909932</mobileNum>
+        <age>36</age>
+        <dob>1988-05-22</dob>
+        <address>1678 Nelson Street</address>
+        <city>West Covina</city>
+        <state>California</state>
+    </listPassenger>
+    <listPassenger>
+        <passengerID>202</passengerID>
+        <passengerName>Mike John</passengerName>
+        <mobileNum>5678999932</mobileNum>
+        <age>35</age>
+        <dob>1989-07-22</dob>
+        <address>167 Park Street</address>
+        <city>Santa Ana</city>
+        <state>California</state>
+    </listPassenger>
+</Passengers>
