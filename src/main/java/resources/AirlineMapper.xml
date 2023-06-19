@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="resources.AirlineMapper">
+    <select id="selectAirlineBycode" resultType="db.model.Airline">
+        select airline_code as airlineCode,airline_name as airlineName from Airline where airline_code = #{id}
+    </select>
+    <select id="selectAll" resultType="db.model.Airline">
+        select airline_code as airlineCode,airline_name as airlineName from Airline
+    </select>
+    <insert id="insert" parameterType="db.model.Airline">
+        insert into airline(airline_name,airline_code) values (#{airlineName},#{airlineCode})
+    </insert>
+    <update id="update" parameterType="db.model.Airline">
+        Update airline set airline_name=#{airlineName} where airline_code=#{airlineCode}
+    </update>
+    <delete id="delete" parameterType="String">
+        delete from airline where airline_code=#{airlineCode}
+    </delete>
+</mapper>

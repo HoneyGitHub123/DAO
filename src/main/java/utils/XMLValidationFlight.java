@@ -42,7 +42,7 @@ public class XMLValidationFlight {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(new File(xmlPath));
-            String flightNum = document.getElementsByTagName("flightNo").item(0).getTextContent();
+            String flightNum = document.getElementsByTagName("flightno").item(0).getTextContent();
             String flightName = document.getElementsByTagName("flightname").item(0).getTextContent();
             String departure = document.getElementsByTagName("departure").item(0).getTextContent();
             String arrival = document.getElementsByTagName("arrival").item(0).getTextContent();
@@ -54,7 +54,7 @@ public class XMLValidationFlight {
             System.out.println("Departure Time:" + departure);
             System.out.println("Arrival Time:" + arrival);
             System.out.println("Starting Place:" + source);
-            System.out.println("Ending Place" + destination);
+            System.out.println("Ending Place:" + destination);
             System.out.println("Seats Available:" + seats);
         } catch (ParserConfigurationException ex) {
             throw new RuntimeException(ex);

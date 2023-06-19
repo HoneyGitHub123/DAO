@@ -12,7 +12,7 @@ import java.io.IOException;
 public class XMLValidationCountry {
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
-        String xmlPath = "src/test/country.xml";
+        String xmlPath = "country.xml";
 
         boolean isValid = validateSchema(xmlPath);
         System.out.println("Validated XML Schema:" + isValid);
