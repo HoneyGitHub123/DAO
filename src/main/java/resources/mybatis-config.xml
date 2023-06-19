@@ -15,7 +15,8 @@
         </environment>
     </environments>
     <mappers>
-       <mapper resource="src/main/java/resources/AirlineMapper.xml"/>
+        <mapper resource="src/main/java/resources/AirlineMapper.xml"/>
+        <mapper class="db.model.AirportMapper"/>
     </mappers>
 
 </configuration>
