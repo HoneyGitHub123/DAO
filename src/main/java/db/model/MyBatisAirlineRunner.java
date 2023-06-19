@@ -16,18 +16,22 @@ public class MyBatisAirlineRunner {
         Airline airline1 = session.selectOne("resources.AirlineMapper.selectAirlineBycode", "AAL");
         System.out.println("Select Operation");
         System.out.println("====================");
+        System.out.println();
         System.out.println(airline1);
         System.out.println("Insert Operation");
         System.out.println("====================");
+        System.out.println();
         Airline airline3 = new Airline("Air India Express", "AXB");
         int updatedRows = session.insert("resources.AirlineMapper.insert", airline3);
         System.out.println("Number of rows updated:" + updatedRows);
         System.out.println("SelectAll Operation");
         System.out.println("====================");
+        System.out.println();
         List<Airline> airline2 = session.selectList("resources.AirlineMapper.selectAll");
         System.out.println(airline2);
         System.out.println("Update Operation");
         System.out.println("====================");
+        System.out.println();
         Airline airline4 = new Airline();
         airline4.setAirlineName("AirIndiaExpress");
         airline4.setAirlineCode("AXB");
@@ -35,6 +39,7 @@ public class MyBatisAirlineRunner {
         System.out.println("Number of rows updated:" + updatedRows1);
         System.out.println("Delete Operation");
         System.out.println("====================");
+        System.out.println();
         int updatedRows2 = session.update("resources.AirlineMapper.delete", "AXB");
         System.out.println("Number of rows deleted:" + updatedRows2);
 
