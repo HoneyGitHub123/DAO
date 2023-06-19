@@ -15,7 +15,7 @@ public class XMLValidationCountry {
         String xmlPath = "country.xml";
 
         boolean isValid = validateSchema(xmlPath);
-        System.out.println("Validated XML Schema:" + isValid);
+        System.out.println("Validated XML Schema :" + isValid);
 
         if (isValid) {
             parseXMLWithDOM(xmlPath);

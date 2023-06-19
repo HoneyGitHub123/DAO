@@ -55,7 +55,7 @@ public class XMLValidationFlight {
             System.out.println("Arrival Time:" + arrival);
             System.out.println("Starting Place:" + source);
             System.out.println("Ending Place:" + destination);
-            System.out.println("Seats Available:" + seats);
+            System.out.println("Seats Available :" + seats);
         } catch (ParserConfigurationException ex) {
             throw new RuntimeException(ex);
         } catch (IOException ex) {
