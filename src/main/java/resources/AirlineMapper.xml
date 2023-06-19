@@ -3,11 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="resources.AirlineMapper">
-    <select id="selectAirlineBycode" resultType="db.model.Airline">
-        select airline_code as airlineCode,airline_name as airlineName from Airline where airline_code = #{id}
+    <select id="selectAirlineBycode" resultType="db.model.Airline" resultMap="resultMapping">
+        select airline_code,airline_name  from Airline where airline_code = #{id}
     </select>
-    <select id="selectAll" resultType="db.model.Airline">
-        select airline_code as airlineCode,airline_name as airlineName from Airline
+    <resultMap id="resultMapping" type="db.model.Airline" autoMapping="false">
+        <id property="airlineCode" column="airline_code"/>
+        <result property="airlineName" column="airline_name"/>
+    </resultMap>
+    <select id="selectAll" resultType="db.model.Airline" resultMap="resultMapping">
+        select airline_code ,airline_name from Airline
     </select>
     <insert id="insert" parameterType="db.model.Airline">
         insert into airline(airline_name,airline_code) values (#{airlineName},#{airlineCode})

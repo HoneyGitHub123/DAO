@@ -9,6 +9,7 @@ public class Airline {
         this.airlineName = airlineName;
         this.airlineCode = airlineCode;
     }
+
     public Airline() {
     }
 
