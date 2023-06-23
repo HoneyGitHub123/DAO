@@ -1,17 +1,18 @@
 package service;
 
-import model.Airport;
-import model.Country;
+import model.Flight;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
-public interface Service <T>{
+public interface Service<T> {
 
-    T findByCode(T entity) throws SQLException;
+    Optional<T> findByCode(T entity) throws SQLException;
 
-    T findById(T entity) throws SQLException;
-    T findByNum(T entity) throws SQLException;
+    Optional<T> findById(T entity) throws SQLException;
+
+    Optional<T> findByNum(T entity) throws SQLException;
 
     List<T> findAll() throws SQLException;
 

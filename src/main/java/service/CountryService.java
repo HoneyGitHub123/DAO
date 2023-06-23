@@ -1,10 +1,12 @@
 package service;
 
+import model.Flight;
 import utils.GenericDao;
 import model.Country;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class CountryService implements Service<Country> {
 
@@ -15,17 +17,17 @@ public class CountryService implements Service<Country> {
     }
 
     @Override
-    public Country findByCode(Country entity) throws SQLException {
+    public Optional<Country> findByCode(Country entity) throws SQLException {
         return countryDao.findByCode(entity);
     }
 
     @Override
-    public Country findById(Country entity) throws SQLException {
+    public Optional<Country> findById(Country entity) throws SQLException {
         return null;
     }
 
     @Override
-    public Country findByNum(Country entity) throws SQLException {
+    public Optional<Country> findByNum(Country entity) throws SQLException {
         return null;
     }
 

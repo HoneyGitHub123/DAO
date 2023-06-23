@@ -1,12 +1,14 @@
 package service;
 
+import model.Flight;
 import utils.GenericDao;
 import model.Airport;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
-public class AirportService implements Service<Airport> {
+public abstract class AirportService implements Service<Airport> {
 
     private final GenericDao<Airport> airportDao;
 
@@ -15,19 +17,20 @@ public class AirportService implements Service<Airport> {
     }
 
     @Override
-    public Airport findByCode(Airport entity) throws SQLException {
+    public Optional<Airport> findByCode(Airport entity) throws SQLException {
         return airportDao.findByCode(entity);
     }
 
     @Override
-    public Airport findById(Airport entity) throws SQLException {
+    public Optional<Airport> findById(Airport entity) throws SQLException {
         return null;
     }
 
     @Override
-    public Airport findByNum(Airport entity) throws SQLException {
+    public Optional<Airport> findByNum(Airport entity) throws SQLException {
         return null;
     }
+
 
     @Override
     public List<Airport> findAll() throws SQLException {

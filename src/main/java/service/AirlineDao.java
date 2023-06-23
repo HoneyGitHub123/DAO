@@ -1,5 +1,6 @@
 package service;
 
+import dboperations.AirlineSqlOperation;
 import utils.AbstractDao;
 import model.Airline;
 import utils.DataBaseConnection;
@@ -10,82 +11,81 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static dboperations.AirlineSqlOperation.*;
 
 public class AirlineDao extends AbstractDao<Airline> {
     @Override
-    public Airline findByCode(Airline airline) throws SQLException {
-        Connection connection = DataBaseConnection.getConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement("select * from airline where airline_code=?");
+    public Optional<Airline> findByCode(Airline airline) throws SQLException {
+        try (Connection connection = DataBaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_BY_CODE)) {
             statement.setString(1, airline.getAirlineCode());
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
 
-                return getAirlineFromResultSet(resultSet);
+                    return Optional.of(getAirlineFromResultSet(resultSet));
+                }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
+        return Optional.empty();
+    }
+
+
+    @Override
+    public Optional<Airline> findById(Airline entity) throws SQLException {
         return null;
     }
 
     @Override
-    public Airline findById(Airline entity) throws SQLException {
-        return null;
-    }
-
-    @Override
-    public Airline findByNum(Airline entity) throws SQLException {
+    public Optional<Airline> findByNum(Airline entity) throws SQLException {
         return null;
     }
 
     @Override
     public List<Airline> findAll() throws SQLException {
         List<Airline> airlines = new ArrayList<Airline>();
-        Connection connection = DataBaseConnection.getConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement(" select * from airline;");
+        try (Connection connection = DataBaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(AirlineSqlOperation.SELECT_ALL)) {
             ResultSet resultSet = statement.executeQuery();
+
             while (resultSet.next()) {
-                Airline airline = getAirlineFromResultSet(resultSet);
+                Airline airline = new Airline();
+                airline = getAirlineFromResultSet(resultSet);
                 airlines.add(airline);
+
             }
-            return airlines;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return airlines;
     }
+
 
     @Override
     public boolean update(Airline airline) throws SQLException {
-        Connection connection = DataBaseConnection.getConnection();
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(" Update airline set airline_name=? where airline_code=?");
+        try (Connection connection = DataBaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(AirlineSqlOperation.UPDATE)) {
             statement.setString(1, airline.getAirlineName());
             statement.setString(2, airline.getAirlineCode());
-            int i = statement.executeUpdate();
-            if (i == 1) {
-                return true;
-            }
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected == 1;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
 
+
     @Override
     public boolean delete(Airline airline) throws SQLException {
-        Connection connection = DataBaseConnection.getConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement("delete from airline where airline_code=?");
+        try (Connection connection = DataBaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(AirlineSqlOperation.DELETE)) {
             statement.setString(1, airline.getAirlineCode());
-            int i = statement.executeUpdate();
-            if (i == 1) {
-                return true;
-            }
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,24 +94,16 @@ public class AirlineDao extends AbstractDao<Airline> {
 
     @Override
     public boolean insert(Airline airline) throws SQLException {
-        Connection connection = DataBaseConnection.getConnection();
-        String sql = "insert into airline(airline_name,airline_code) values (?,?)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
+        try (Connection connection = DataBaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(AirlineSqlOperation.INSERT)) {
             statement.setString(1, airline.getAirlineName());
             statement.setString(2, airline.getAirlineCode());
-
-            int i = statement.executeUpdate();//returns number of rows affected
-
-            if (i == 1) {
-                return true;
-            }
+            int rowsAffected = statement.executeUpdate();//returns number of rows affected
+            return rowsAffected == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-
 
     private Airline getAirlineFromResultSet(ResultSet resultSet) throws SQLException {
         Airline airline = new Airline();
@@ -119,5 +111,6 @@ public class AirlineDao extends AbstractDao<Airline> {
         airline.setAirlineName(resultSet.getString("airline_name"));
         return airline;
     }
+
 
 }

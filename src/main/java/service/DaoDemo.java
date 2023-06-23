@@ -4,6 +4,7 @@ import model.*;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class DaoDemo {
 
@@ -14,7 +15,7 @@ public class DaoDemo {
         System.out.println("******************************************");
         System.out.println();
         CountryDao countryDao = new CountryDao();
-        Country country1 = countryDao.findByCode(new Country("CA", "Canada"));
+        Optional<Country> country1 = countryDao.findByCode(new Country("CA", "Canada"));
         System.out.println("select * from country where country_code=?");
         System.out.println(country1);
 
@@ -47,7 +48,7 @@ public class DaoDemo {
         System.out.println("******************************************");
         System.out.println();
         AirportDao airportDao = new AirportDao();
-        Airport airport1 = airportDao.findByCode(new Airport("LAX", "Los Angeles International Airport", "Los Angeles", "US", "California"));
+        Optional<Airport> airport1 = airportDao.findByCode(new Airport("LAX", "Los Angeles International Airport", "Los Angeles", "US", "California"));
         System.out.println("select * from airport where airport_code=?");
         System.out.println(airport1);
 
@@ -83,7 +84,7 @@ public class DaoDemo {
         System.out.println();
 
         AirlineDao airlineDao = new AirlineDao();
-        Airline airline = airlineDao.findByCode(new Airline("American Airlines", "AAL"));
+        Optional<Airline> airline = airlineDao.findByCode(new Airline("American Airlines", "AAL"));
         System.out.println("select * from airline where airline_code=?");
         System.out.println(airline);
 
@@ -93,7 +94,7 @@ public class DaoDemo {
         System.out.println("Retrieve all records successfully");
 
 
-        boolean insert2 = airlineDao.insert(new Airline("Delta Airlines", "DAL"));
+        boolean insert2 = airlineDao.insert(new Airline("DELTA Airlines", "DAL"));
         System.out.println(insert2);
         if (insert2 == true) {
             System.out.println("Inserted successfully");
@@ -119,7 +120,7 @@ public class DaoDemo {
         System.out.println();
 
         PassengerDao passengerDao = new PassengerDao();
-        Passenger passenger = passengerDao.findById(new Passenger(100, "Maria John", "6754327892", 35, "1989-05-23", "109 park victoria", "West Covina", "California", "US"));
+        Optional<Passenger> passenger = passengerDao.findById(new Passenger(100, "Maria John", "6754327892", 35, "1989-05-23", "109 park victoria", "West Covina", "California", "US"));
         System.out.println("select * from passenger where passenger_id=?");
         System.out.println(passenger);
 
@@ -152,7 +153,7 @@ public class DaoDemo {
         }
 
         FlightDao flightDao = new FlightDao();
-        Flight flight = flightDao.findByNum(new Flight(300,"Alaskan Airlines","2023-06-12 13:00:00","2023-06-12 14:00:00","Los Angeles","Oregon",330));
+        Optional<Flight> flight = flightDao.findByNum(new Flight(300, "Alaskan Airlines", "2023-06-12 13:00:00", "2023-06-12 14:00:00", "Los Angeles", "Oregon", 330));
         System.out.println("select * from flight where flight_no=?");
         System.out.println(flight);
     }

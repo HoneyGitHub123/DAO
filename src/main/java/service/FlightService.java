@@ -1,11 +1,11 @@
 package service;
 
-import model.Airline;
 import model.Flight;
 import utils.GenericDao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class FlightService implements Service<Flight> {
 
@@ -18,17 +18,17 @@ public class FlightService implements Service<Flight> {
     }
 
     @Override
-    public Flight findByCode(Flight entity) throws SQLException {
+    public Optional<Flight> findByCode(Flight entity) throws SQLException {
         return null;
     }
 
     @Override
-    public Flight findById(Flight entity) throws SQLException {
+    public Optional<Flight> findById(Flight entity) throws SQLException {
         return null;
     }
 
     @Override
-    public Flight findByNum(Flight entity) throws SQLException {
+    public Optional<Flight> findByNum(Flight entity) throws SQLException {
         return flightDao.findByNum(entity);
 
     }

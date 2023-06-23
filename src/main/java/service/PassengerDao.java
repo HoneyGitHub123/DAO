@@ -1,5 +1,6 @@
 package service;
 
+import dboperations.PassengerSqlOperation;
 import model.Airline;
 import model.Passenger;
 import utils.AbstractDao;
@@ -11,95 +12,89 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PassengerDao extends AbstractDao<Passenger> {
 
 
-    public Passenger findById(Passenger passenger) throws SQLException {
-        Connection connection = DataBaseConnection.getConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement("select * from passenger where passenger_id=?");
+    public Optional<Passenger> findById(Passenger passenger) throws SQLException {
+        try (Connection connection = DataBaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(PassengerSqlOperation.SELECT_BY_ID)) {
             statement.setInt(1, passenger.getPassengerID());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
 
-                return getPassengerFromResultSet(resultSet);
+                return Optional.of(getPassengerFromResultSet(resultSet));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Passenger> findByNum(Passenger entity) throws SQLException {
         return null;
     }
 
     @Override
-    public Passenger findByNum(Passenger entity) throws SQLException {
-        return null;
-    }
-
-    @Override
-    public Passenger findByCode(Passenger entity) throws SQLException {
+    public Optional<Passenger> findByCode(Passenger entity) throws SQLException {
         return null;
     }
 
     @Override
     public List<Passenger> findAll() throws SQLException {
         List<Passenger> passengers = new ArrayList<Passenger>();
-        Connection connection = DataBaseConnection.getConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement(" select * from passenger;");
+        try (Connection connection = DataBaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(PassengerSqlOperation.SELECT_ALL)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Passenger passenger = getPassengerFromResultSet(resultSet);
                 passengers.add(passenger);
+
+
             }
-            return passengers;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return passengers;
     }
+
 
     @Override
     public boolean update(Passenger passenger) throws SQLException {
-        Connection connection = DataBaseConnection.getConnection();
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(" Update passenger set passenger_name=? where passenger_id=?");
+        try (Connection connection = DataBaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(PassengerSqlOperation.UPDATE)) {
             statement.setString(1, passenger.getPassengerName());
             statement.setInt(2, passenger.getPassengerID());
-            int i = statement.executeUpdate();
-            if (i == 1) {
-                return true;
-            }
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
+
 
     @Override
     public boolean delete(Passenger passenger) throws SQLException {
-        Connection connection = DataBaseConnection.getConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement("delete from passenger where passenger_id=?");
+        try (Connection connection = DataBaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(PassengerSqlOperation.DELETE)) {
             statement.setInt(1, passenger.getPassengerID());
-            int i = statement.executeUpdate();
-            if (i == 1) {
-                return true;
-            }
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
 
+
     @Override
     public boolean insert(Passenger passenger) throws SQLException {
-        Connection connection = DataBaseConnection.getConnection();
-        String sql = "insert into passenger(passenger_id,passenger_name,mobile_no,age,dob,address,city,state,country_code) values(?,?,?,?,?,?,?,?,?)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
+        try (Connection connection = DataBaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(PassengerSqlOperation.INSERT)) {
             statement.setInt(1, passenger.getPassengerID());
             statement.setString(2, passenger.getPassengerName());
             statement.setString(3, passenger.getMobileNum());
@@ -111,11 +106,8 @@ public class PassengerDao extends AbstractDao<Passenger> {
             statement.setString(9, passenger.getCountryCode());
 
 
-            int i = statement.executeUpdate();//returns number of rows affected
-
-            if (i == 1) {
-                return true;
-            }
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -136,6 +128,7 @@ public class PassengerDao extends AbstractDao<Passenger> {
         passenger.setCountryCode(resultSet.getString("country_code"));
         return passenger;
     }
-
 }
+
+
 
