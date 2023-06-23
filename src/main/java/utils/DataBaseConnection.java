@@ -18,7 +18,7 @@ public class DataBaseConnection {
         return connection;
     }
 
-    public static void main(String[] args) throws SQLException {
+   /* public static void main(String[] args) throws SQLException {
 
         Connection con = DataBaseConnection.getConnection();
 
@@ -26,7 +26,7 @@ public class DataBaseConnection {
             System.out.println("Connection success");
         }
 
-    }
+    }*/
 
 
 }
