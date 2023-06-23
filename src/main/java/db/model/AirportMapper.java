@@ -6,14 +6,13 @@ import java.util.List;
 
 public interface AirportMapper {
 
-    final String selectAll = "Select * from airport";
-    final String selectByCode = "Select airport_code,airport_name,city_name,state_name,country_code from airport where airport_code=#{airportCode}";
-    final String delete = "Delete from airport where airport_code=#{airportCode}";
-    final String insert = "Insert into airport(airport_code,airport_name,city_name,country_code,state_name) values(#{airportCode},#{airportName},#{cityName},#{countryCode},#{stateName})";
-    final String update = "update airport set airport_name=#{airportName} where airport_code=#{airportCode}";
+    static final String SELECT_BY_CODE = "SELECT airport_code,airport_name,city_name,state_name,country_code FROM airport WHERE airport_code=#{airportCode}";
+    static final String DELETE = "DELETE FROM airport WHERE airport_code=#{airportCode}";
+    static final String INSERT = "INSERT INTO airport(airport_code,airport_name,city_name,country_code,state_name) VALUES(#{airportCode},#{airportName},#{cityName},#{countryCode},#{stateName})";
+    static final String UPDATE = "UPDATE airport SET airport_name=#{airportName} WHERE airport_code=#{airportCode}";
 
 
-    @Select(selectAll)
+    @Select("Select * from airport")
     @Results(value = {
             @Result(property = "airportCode", column = "airport_code"),
             @Result(property = "airportName", column = "airport_name"),
@@ -25,7 +24,7 @@ public interface AirportMapper {
     List<Airport> selectAll();
 
 
-    @Select(selectByCode)
+    @Select(SELECT_BY_CODE)
     @Results(value = {
             @Result(property = "airportCode", column = "airport_code"),
             @Result(property = "airportName", column = "airport_name"),
@@ -36,13 +35,13 @@ public interface AirportMapper {
     })
     Airport selectByCode(String airportCode);
 
-    @Update(update)
+    @Update(UPDATE)
     void update(Airport airport);
 
-    @Delete(delete)
+    @Delete(DELETE)
     int delete(String airportCode);
 
-    @Insert(insert)
+    @Insert(INSERT)
     @Options(useGeneratedKeys = true, keyProperty = "airportCode")
     int insert(Airport airport);
 
